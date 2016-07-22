@@ -14,6 +14,15 @@ leptonTypeVHbb = NTupleObjectType("leptonTypeVHbb", baseObjectTypes = [ leptonTy
     # Loose id 
     NTupleVariable("looseIdSusy", lambda x : x.looseIdSusy if hasattr(x, 'looseIdSusy') else -1, int, help="Loose ID for Susy ntuples (always true on selected leptons)"),
     NTupleVariable("looseIdPOG", lambda x : x.muonID("POG_ID_Loose") if abs(x.pdgId()) == 13 else -1, int, help="Loose ID for Susy ntuples (always true on selected leptons)"),
+    NTupleVariable("looseIdPOG_ICHEP2016", lambda x : x.muonID("POG_ID_Loose_ICHEP2016") if abs(x.pdgId()) == 13 else -1, int, help="Recommanded POG loose ID for ICHEP 2016"),
+    #Medium ID
+    #NTupleVariable("mediumIdPOG_ICHEP2016", lambda x : x.muonID("POG_ID_Medium_ICHEP2016") if abs(x.pdgId()) == 13 else -1, int, help="Recommanded POG medium ID for ICHEP 2016"),
+        #For test only
+    #NTupleVariable("mediumIdPOG_ICHEP2016", lambda x : x.muonID("POG_ID_Medium") if abs(x.pdgId()) == 13 else -1, int, help="POG tight ID use for preselection"),
+    # Tight ID
+    #NTupleVariable("tightIdPOG_ICHEP2016", lambda x : x.muonID("POG_ID_Tight_ICHEP2016") if abs(x.pdgId()) == 13 else -1, int, help="Recommanded POG tight ID for ICHEP 2016"),
+        #For test only
+    #NTupleVariable("tightIdPOG", lambda x : x.muonID("POG_ID_Tight") if abs(x.pdgId()) == 13 else -1, int, help="POG tight ID use for preselection"),
     # Isolations with the two radia
     NTupleVariable("chargedHadRelIso03",  lambda x : x.chargedHadronIsoR(0.3)/x.pt(), help="PF Rel Iso, R=0.3, charged hadrons only"),
     NTupleVariable("chargedHadRelIso04",  lambda x : x.chargedHadronIsoR(0.4)/x.pt(), help="PF Rel Iso, R=0.4, charged hadrons only"),
