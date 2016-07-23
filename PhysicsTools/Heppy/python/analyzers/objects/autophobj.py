@@ -52,6 +52,17 @@ leptonType = NTupleObjectType("lepton", baseObjectTypes = [ particleType ], vari
     NTupleVariable("eleCutIdCSA14_25ns_v1",     lambda x : (1*x.electronID("POG_Cuts_ID_CSA14_25ns_v1_Veto") + 1*x.electronID("POG_Cuts_ID_CSA14_25ns_v1_Loose") + 1*x.electronID("POG_Cuts_ID_CSA14_25ns_v1_Medium") + 1*x.electronID("POG_Cuts_ID_CSA14_25ns_v1_Tight")) if abs(x.pdgId()) == 11 else -1, int, help="Electron cut-based id (POG CSA14_25ns_v1): 0=none, 1=veto, 2=loose, 3=medium, 4=tight"),
     NTupleVariable("eleCutIdCSA14_50ns_v1",     lambda x : (1*x.electronID("POG_Cuts_ID_CSA14_50ns_v1_Veto") + 1*x.electronID("POG_Cuts_ID_CSA14_50ns_v1_Loose") + 1*x.electronID("POG_Cuts_ID_CSA14_50ns_v1_Medium") + 1*x.electronID("POG_Cuts_ID_CSA14_50ns_v1_Tight")) if abs(x.pdgId()) == 11 else -1, int, help="Electron cut-based id (POG CSA14_50ns_v1): 0=none, 1=veto, 2=loose, 3=medium, 4=tight"),
     NTupleVariable("eleCutIdSpring15_25ns_v1",     lambda x : (1*x.electronID("cutBasedElectronID-Spring15-25ns-V1-standalone-veto") + 1*x.electronID("cutBasedElectronID-Spring15-25ns-V1-standalone-loose") + 1*x.electronID("cutBasedElectronID-Spring15-25ns-V1-standalone-medium") + 1*x.electronID("cutBasedElectronID-Spring15-25ns-V1-standalone-tight")) if abs(x.pdgId()) == 11 and x.isElectronIDAvailable("cutBasedElectronID-Spring15-25ns-V1-standalone-veto") else -1, int, help="Electron cut-based id (POG Spring15_25ns_v1): 0=none, 1=veto, 2=loose, 3=medium, 4=tight"),
+    # Extra electron id variables
+    #Loose ID
+    NTupleVariable("looseIdPOG_ICHEP2016",  lambda x : x.muonID("POG_ID_Loose_ICHEP2016") if abs(x.pdgId())==13 else 1, int, help="Muon POG Loose muon ID for ICHEP 2016"),
+    #Medium ID
+    NTupleVariable("mediumIdPOG_ICHEP2016", lambda x : x.muonID("POG_ID_Medium_ICHEP2016") if abs(x.pdgId()) == 13 else 1, int, help="Recommanded POG medium  muon ID for ICHEP 2016"),
+        #For test only
+    NTupleVariable("mediumIdPOG", lambda x : x.muonID("POG_ID_Medium") if abs(x.pdgId()) == 13 else 1, int, help="POG tight muon ID use for preselection"),
+    # Tight ID
+    NTupleVariable("tightIdPOG_ICHEP2016", lambda x : x.muonID("POG_ID_Tight_ICHEP2016") if abs(x.pdgId()) == 13 else 1, int, help="Recommanded POG tight muon ID for ICHEP 2016"),
+        #For test only
+    NTupleVariable("tightIdPOG", lambda x : x.muonID("POG_ID_Tight") if abs(x.pdgId()) == 13 else 1, int, help="POG tight muon ID use for preselection"),
     # Impact parameter
     NTupleVariable("dxy",   lambda x : x.dxy(), help="d_{xy} with respect to PV, in cm (with sign)"),
     NTupleVariable("dz",    lambda x : x.dz() , help="d_{z} with respect to PV, in cm (with sign)"),

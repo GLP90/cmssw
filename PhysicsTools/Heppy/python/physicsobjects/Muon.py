@@ -50,19 +50,19 @@ class Muon( Lepton ):
                 return self.physObj.isGlobalMuon() or (self.physObj.isTrackerMuon() and self.physObj.numberOfMatchedStations() > 0)
             if name == "POG_ID_Loose_ICHEP2016":  return (self.physObj.isGlobalMuon() or self.physObj.isTrackerMuon()) and \
                                                       self.physObj.isPFMuon() 
-            #if name == "POG_ID_Tight_ICHEP2016":  return self.physObj.isGlobalMuon() and \
-            #                                          self.physObj.isPFMuon() and \
-            #                                          self.physObj.globalTrack().normalizedChi2() < 10. and \
-            #                                          self.physObj.globalTrack().hitPattern().numberOfValidMuonHits() > 0 and \
-            #                                          self.physObj.numberOfMatchedStations() > 1 and \
-            #                                          fabs(self.physObj.muonBestTrack().dxy(vertex.position())) < 0.2 and \
-            #                                          fabs(self.physObj.muonBestTrack().dz(vertex.position())) < 0.5 and \
-            #                                          self.physObj.innerTrack().hitPattern().numberOfValidPixelHits() > 0 and \
-            #                                          self.physObj.innerTrack().hitPattern().trackerLayersWithMeasurement() > 5
-            #if name == "POG_ID_Medium_ICHEP2016":
-            #    goodGlb = self.physObj.isGlobalMuon() and self.physObj.globalTrack().normalizedChi2() < 3 and self.physObj.combinedQuality().chi2LocalPosition < 12 and self.physObj.combinedQuality().trkKink < 20
-            #    goodMed = self.physObj.innerTrack().validFraction() > 0.49 and self.physObj.segmentCompatibility() >= (0.303 if goodGlb else 0.451)
-            #    return goodMed
+            if name == "POG_ID_Tight_ICHEP2016":  return self.physObj.isGlobalMuon() and \
+                                                      self.physObj.isPFMuon() and \
+                                                      self.physObj.globalTrack().normalizedChi2() < 10. and \
+                                                      self.physObj.globalTrack().hitPattern().numberOfValidMuonHits() > 0 and \
+                                                      self.physObj.numberOfMatchedStations() > 1 and \
+                                                      abs(self.physObj.muonBestTrack().dxy(vertex.position())) < 0.2 and \
+                                                      abs(self.physObj.muonBestTrack().dz(vertex.position())) < 0.5 and \
+                                                      self.physObj.innerTrack().hitPattern().numberOfValidPixelHits() > 0 and \
+                                                      self.physObj.innerTrack().hitPattern().trackerLayersWithMeasurement() > 5
+            if name == "POG_ID_Medium_ICHEP2016":
+                goodGlb = self.physObj.isGlobalMuon() and self.physObj.globalTrack().normalizedChi2() < 3 and self.physObj.combinedQuality().chi2LocalPosition < 12 and self.physObj.combinedQuality().trkKink < 20
+                goodMed = self.physObj.innerTrack().validFraction() > 0.49 and self.physObj.segmentCompatibility() >= (0.303 if goodGlb else 0.451)
+                return goodMed
                                          
         elif name.startswith("HZZ_"):
             if name == "HZZ_ID_TkHighPt":
