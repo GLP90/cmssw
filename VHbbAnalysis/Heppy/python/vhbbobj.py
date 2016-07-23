@@ -14,16 +14,6 @@ leptonTypeVHbb = NTupleObjectType("leptonTypeVHbb", baseObjectTypes = [ leptonTy
     # Loose id 
     NTupleVariable("looseIdSusy", lambda x : x.looseIdSusy if hasattr(x, 'looseIdSusy') else -1, int, help="Loose ID for Susy ntuples (always true on selected leptons)"),
     NTupleVariable("looseIdPOG", lambda x : x.muonID("POG_ID_Loose") if abs(x.pdgId()) == 13 else -1, int, help="Loose ID for Susy ntuples (always true on selected leptons)"),
-    NTupleVariable("looseIdPOG_ICHEP2016", lambda x : x.muonID("POG_ID_Loose_ICHEP2016") if abs(x.pdgId()) == 13 else -1, int, help="Recommanded POG loose ID for ICHEP 2016"),
-    #Medium ID
-    #NTupleVariable("mediumIdPOG_ICHEP2016", lambda x : x.muonID("POG_ID_Medium_ICHEP2016") if abs(x.pdgId()) == 13 else -1, int, help="Recommanded POG medium ID for ICHEP 2016"),
-        #For test only
-    #NTupleVariable("mediumIdPOG_ICHEP2016", lambda x : x.muonID("POG_ID_Medium") if abs(x.pdgId()) == 13 else -1, int, help="POG tight ID use for preselection"),
-    # Tight ID
-    #NTupleVariable("tightIdPOG_ICHEP2016", lambda x : x.muonID("POG_ID_Tight_ICHEP2016") if abs(x.pdgId()) == 13 else -1, int, help="Recommanded POG tight ID for ICHEP 2016"),
-        #For test only
-    #NTupleVariable("tightIdPOG", lambda x : x.muonID("POG_ID_Tight") if abs(x.pdgId()) == 13 else -1, int, help="POG tight ID use for preselection"),
-    # Isolations with the two radia
     NTupleVariable("chargedHadRelIso03",  lambda x : x.chargedHadronIsoR(0.3)/x.pt(), help="PF Rel Iso, R=0.3, charged hadrons only"),
     NTupleVariable("chargedHadRelIso04",  lambda x : x.chargedHadronIsoR(0.4)/x.pt(), help="PF Rel Iso, R=0.4, charged hadrons only"),
     NTupleVariable("eleSieie",    lambda x : x.full5x5_sigmaIetaIeta() if abs(x.pdgId())==11 else -1., help="sigma IEtaIEta for electrons"),
@@ -33,7 +23,17 @@ leptonTypeVHbb = NTupleObjectType("leptonTypeVHbb", baseObjectTypes = [ leptonTy
     NTupleVariable("eleMissingHits",      lambda x : x.lostInner() if abs(x.pdgId())==11 else -1., help="Missing hits for electrons"),
     NTupleVariable("eleChi2",      lambda x : x.gsfTrack().normalizedChi2() if abs(x.pdgId())==11 else -1., help="Track chi squared for electrons' gsf tracks"),
     # Extra electron id variables
-    NTupleVariable("convVetoFull", lambda x : (x.passConversionVeto() and x.lostInner() == 0) if abs(x.pdgId())==11 else 1, int, help="Conv veto + no missing hits for electrons, always true for muons."),
+    #Loose ID
+    #NTupleVariable("looseIdPOG_ICHEP2016",  lambda x : x.muonID("POG_ID_Loose_ICHEP2016") if abs(x.pdgId())==13 else 1, int, help="Muon POG Loose muon ID for ICHEP 2016"),
+    #Medium ID
+    #NTupleVariable("mediumIdPOG_ICHEP2016", lambda x : x.muonID("POG_ID_Medium_ICHEP2016") if abs(x.pdgId()) == 13 else 1, int, help="Recommanded POG medium  muon ID for ICHEP 2016"),
+    #    #For test only
+    #NTupleVariable("mediumIdPOG", lambda x : x.muonID("POG_ID_Medium") if abs(x.pdgId()) == 13 else 1, int, help="POG tight muon ID use for preselection"),
+    ## Tight ID
+    #NTupleVariable("tightIdPOG_ICHEP2016", lambda x : x.muonID("POG_ID_Tight_ICHEP2016") if abs(x.pdgId()) == 13 else 1, int, help="Recommanded POG tight muon ID for ICHEP 2016"),
+    #    #For test only
+    #NTupleVariable("tightIdPOG", lambda x : x.muonID("POG_ID_Tight") if abs(x.pdgId()) == 13 else 1, int, help="POG tight muon ID use for preselection"),
+    #NTupleVariable("convVetoFull", lambda x : (x.passConversionVeto() and x.lostInner() == 0) if abs(x.pdgId())==11 else 1, int, help="Conv veto + no missing hits for electrons, always true for muons."),
     #NTupleVariable("eleMVArawPhys14NonTrig", lambda x : x.mvaRun2("NonTrigPhys14") if abs(x.pdgId()) == 11 else -1, help="EGamma POG MVA ID for non-triggering electrons (raw MVA value, Phys14 training); 1 for muons"),
     #NTupleVariable("eleMVAIdPhys14NonTrig", lambda x : max(x.electronID("POG_MVA_ID_Phys14_NonTrig_VLoose"), 2*x.electronID("POG_MVA_ID_Phys14_NonTrig_Loose"), 3*x.electronID("POG_MVA_ID_Phys14_NonTrig_Tight")) if abs(x.pdgId()) == 11 else -1, int, help="EGamma POG MVA ID for non-triggering electrons (0=none, 1=vloose, 2=loose, 3=tight, Phys14 training); 1 for muons"),
     NTupleVariable("eleMVArawSpring15Trig", lambda x : getattr(x,"mvaRawSpring15Trig",-2) if abs(x.pdgId()) == 11 else -1, help="EGamma POG MVA ID for triggering electrons (raw MVA value, Spring15 training); 1 for muons"),
